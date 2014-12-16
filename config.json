@@ -1,0 +1,7 @@
+{
+    "name": "HAL42",
+    "channels": ["#equilibre", "#4242"],
+    "password": "",
+    "sasl": true,
+    "server": "irc.freenode.net"
+}
