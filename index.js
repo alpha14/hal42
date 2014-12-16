@@ -6,40 +6,40 @@ var minute = second * 60;
 // configuration
 var server = config.server;
 var name = config.name;
-var chan = '#equilibre';
-var data = {
-    userName: config.name,
-    realName: config.name,
-    channels: config.channels,
-    password: config.password,
-    sasl: config.sasl
-};
+config.customParams.channels = config.channels;
+
 // Create the bot name
-var bot = new irc.Client(server, name, data);
+var bot = new irc.Client(server, name, config.customParams)
+
+bot.sayAll = function(msg) {
+    for (i in config.channels)
+	bot.say(config.channels[i], msg);
+}
 
 bot.addListener("join", function(channel, who) {
-    if(who.substring(0,name.length) != name)
+    if (who.substring(0,name.length) != name)
 	bot.say(channel, "Bienvenue " + who +" !");
+    if (who == config.name)
+	initSay42();
 });
 
 bot.addListener('message', function (from, to, message) {
-    console.log(from + ' => ' + to + ': ' + message);
-    if ((message.indexOf(name)>=0) && (message.indexOf("bot")>=0))
-	bot.say(to, "Je ne suis pas un bot !");
-    else if ((message.indexOf(name)>=0) && (message.indexOf("merci")>=0))
-	bot.say(to, "de rien :)");
-    else if ((message.indexOf(" bocal")>=0) || (message.indexOf("#bocal")>=0))
-	bot.say(to, "https://i.imgur.com/Qg1SrLe.png");
-    else
-	if ((message.indexOf(" php")>=0) || (message.indexOf("#php")>=0))
-	    bot.say(to, "https://i.imgur.com/vlpkkUM.jpg");
-
+    if (config.history)
+	console.log(from + ' => ' + to + ': ' + message);
+    if (message.indexOf(name) >= 0)
+	for (i in config.talkAboutMe)
+	    if (message.indexOf(i) >= 0)
+		bot.say(to, config.talkAboutMe[i]);
+    for (i in config.react)
+	if (message.indexOf(i) >= 0)
+	    bot.say(to, config.react[i]);
 });
 
 bot.addListener('pm', function (from, message) {
     console.log(from + ' => ME: ' + message);
-    if (from === 'Alpha14')
-	bot.say(chan, message);
+    for (i in config.master)
+	if (config.master[i] === from)
+	bot.say(config.primaryChan, message);
 });
 
 bot.addListener('error', function(message) {
@@ -72,7 +72,5 @@ function initSay42() {
 function say42() {
     setTimeout(say42, minute * 60);
     console.log('42');
-    bot.say(chan, "42 !");
+    bot.sayAll("42 !");
 }
-
-initSay42();

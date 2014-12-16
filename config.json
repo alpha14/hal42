@@ -1,7 +1,22 @@
 {
-    "name": "HAL42",
-    "channels": ["#equilibre", "#4242"],
-    "password": "",
-    "sasl": true,
-    "server": "irc.freenode.net"
+    "name": "zoofist",
+    "channels": ["#4242"],
+    "primaryChan": "#4242",
+    "customParams": {
+	"userName": "zoofist",
+	"realName": "zoofist",
+	"password": "",
+	"sasl": false
+    },
+    "server": "irc.freenode.net",
+    "master": ["Alpha14", "Emeraude"],
+    "react": {
+	"bocal": "https://i.imgur.com/Qg1SrLe.png",
+	"php": "https://i.imgur.com/vlpkkUM.jpg"
+    },
+    "talkAboutMe": {
+	"merci": "de rien :)",
+	"bot": "Je ne suis pas un bot !"
+    },
+    "history": true
 }
