@@ -73,7 +73,9 @@ function initSay42(channel) {
 }
 
 function say42(channel) {
-    setTimeout(say42, minute * 60);
+    setTimeout(function() {
+	say42(channel);
+    }, minute * 60);
     console.log('42');
     bot.say(channel, "42 !");
 }
