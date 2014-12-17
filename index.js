@@ -76,7 +76,7 @@ function initSay42(channel) {
 
     if (getMinutes < 42)
 	minutesLeft = (42 - getMinutes) - 1;
-    else (getMinutes > 42)
+    else
 	minutesLeft = (60 - getMinutes) + 42 - 1;
 
     if (getSeconds === 0)
