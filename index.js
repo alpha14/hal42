@@ -19,8 +19,9 @@ bot.sayAll = function(msg) {
 bot.addListener("join", function(channel, who) {
     if (who.substring(0,name.length) != name)
 	bot.say(channel, "Bienvenue " + who +" !");
-    if (who == config.name)
-	initSay42();
+    if (who === config.name) {
+	initSay42(channel);
+    }
 });
 
 bot.addListener('message', function (from, to, message) {
@@ -46,7 +47,7 @@ bot.addListener('error', function(message) {
     console.log('error: ', message);
 });
 
-function initSay42() {
+function initSay42(channel) {
     var getSeconds = moment().seconds()
     var getMinutes = moment().minutes();
     var minutesLeft;
@@ -64,13 +65,15 @@ function initSay42() {
     else
 	secondsLeft = 60 - getSeconds;
     interval = (minutesLeft * minute) + (secondsLeft * second);
-    setTimeout(say42, interval);
+    setTimeout(function() {
+	say42(channel);
+    }, interval);
     console.log(moment().format());
     console.log('First call in ' + minutesLeft + ' minutes and ' + secondsLeft + ' seconds');
 }
 
-function say42() {
+function say42(channel) {
     setTimeout(say42, minute * 60);
     console.log('42');
-    bot.sayAll("42 !");
+    bot.say(channel, "42 !");
 }

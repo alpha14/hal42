@@ -1,16 +1,12 @@
 {
   "name": "ircbot",
   "version": "1.0.0",
-  "description": "",
+  "description": "The IRC bot for the **Equilibre** organization.",
   "main": "index.js",
   "dependencies": {
     "irc": "^0.3.7",
     "moment": "^2.8.4"
   },
-  "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  "author": "Equilibre",
+  "license": "GPL-3.0"
 }

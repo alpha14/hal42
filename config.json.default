@@ -1,18 +1,19 @@
 {
-    "name": "zoofist",
-    "channels": ["#4242"],
-    "primaryChan": "#4242",
+    "name": "HAL42",
+    "channels": ["#equilibre", "#4242"],
+    "primaryChan": "#equilibre",
     "customParams": {
-	"userName": "zoofist",
-	"realName": "zoofist",
+	"userName": "HAL42",
+	"realName": "HAL42",
 	"password": "",
-	"sasl": false
+	"sasl": true
     },
     "server": "irc.freenode.net",
     "master": ["Alpha14", "Emeraude"],
     "react": {
 	"bocal": "https://i.imgur.com/Qg1SrLe.png",
-	"php": "https://i.imgur.com/vlpkkUM.jpg"
+	"php": "https://i.imgur.com/vlpkkUM.jpg",
+	"ubuntu": "http://cdn.meme.am/instances/54738442.jpg"
     },
     "talkAboutMe": {
 	"merci": "de rien :)",
