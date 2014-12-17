@@ -15,7 +15,7 @@ Then, you have to modify the `config.json` file
 
 This is an example of a configuration file:
 
-```json
+```javascript
 {
     "name": "HAL42",
     "channels": ["#equilibre", "#4242"],
@@ -37,9 +37,19 @@ This is an example of a configuration file:
 		"merci": "de rien :)",
 		"bot": "Je ne suis pas un bot !"
     },
-    "history": true // write all the messages said in stdout
+	"meme": [
+		{ // each 10 messages, doctor will receive it's last message as a meme using Ancient-aliens image
+			"user": "Doctor",
+			"meme": "Ancient-aliens",
+			"interval": 10
+		}
+	],
+    "history": true, // write all the messages said in stdout
+	"42": true // say 42 each hour
 }
 ```
+
+If you want to use the memes, you need to install the official [Equilibre Meme Gem](https://github.com/Equilibre/meme).
 
 ### Contributors
 

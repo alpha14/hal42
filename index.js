@@ -1,5 +1,8 @@
+#!/usr/bin/env node
+
 var moment = require("moment");
 var irc = require("irc");
+var shell = require("shelljs");
 var config = require("./config.json");
 var second = 1000;
 var minute = second * 60;
@@ -8,8 +11,13 @@ var server = config.server;
 var name = config.name;
 config.customParams.channels = config.channels;
 
-// Create the bot name
-var bot = new irc.Client(server, name, config.customParams)
+var bot = new irc.Client(server, name, config.customParams);
+
+var meme = config.meme != false && shell.exec('which meme').code == 0;
+
+if (meme)
+    for (i in config.meme)
+	config.meme[i].current = 1;
 
 bot.sayAll = function(msg) {
     for (i in config.channels)
@@ -19,7 +27,7 @@ bot.sayAll = function(msg) {
 bot.addListener("join", function(channel, who) {
     if (who.substring(0,name.length) != name)
 	bot.say(channel, "Bienvenue " + who +" !");
-    if (who === config.name) {
+    if (who === config.name && config["42"] == true) {
 	initSay42(channel);
     }
 });
@@ -34,6 +42,18 @@ bot.addListener('message', function (from, to, message) {
     for (i in config.react)
 	if (message.indexOf(i) >= 0)
 	    bot.say(to, config.react[i]);
+    if (meme) {
+	for (i in config.meme) {
+	    if (config.meme[i].user === from) {
+		if (config.meme[i].current == config.meme[i].interval) {
+		    config.meme[i].current = 1;
+		    bot.say(to, shell.exec('meme --text ' + config.meme[i].meme + ' "' + message + '"' + ' " "').output);
+		}
+		else
+		    ++config.meme[i].current;
+	    }
+	}
+    }
 });
 
 bot.addListener('pm', function (from, message) {

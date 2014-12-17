@@ -5,8 +5,13 @@
   "main": "index.js",
   "dependencies": {
     "irc": "^0.3.7",
-    "moment": "^2.8.4"
+    "moment": "^2.8.4",
+    "shelljs": "^0.3.0"
   },
   "author": "Equilibre",
-  "license": "GPL-3.0"
+  "license": "GPL-3.0",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/alpha14/hal42.git"
+  }
 }

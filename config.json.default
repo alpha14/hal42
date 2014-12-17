@@ -19,5 +19,7 @@
 	"merci": "de rien :)",
 	"bot": "Je ne suis pas un bot !"
     },
-    "history": true
+    "meme": false,
+    "history": true,
+    "42": true
 }
