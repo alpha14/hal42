@@ -29,14 +29,15 @@ This is an example of a configuration file:
     "server": "irc.freenode.net",
     "master": ["Alpha14", "Emeraude"], // the bot will forward their private messages
 	"welcomeMessage": "Bienvenue %s !" // welcome message, "%s" will be replaced by the name of the user
+	"goodbyeMessage": "À la prochaine %s !" // same as welcomeMessage, but when a user logout
     "react": { // the bot will response if one on the words "bocal", "php" or "ubuntu" is said
-		"bocal": "https://i.imgur.com/Qg1SrLe.png",
-		"php": "https://i.imgur.com/vlpkkUM.jpg"
-		"ubuntu": "http://cdn.meme.am/instances/54738442.jpg"
+		" bocal": "https://i.imgur.com/Qg1SrLe.png",
+		" php": "https://i.imgur.com/vlpkkUM.jpg"
+		" ubuntu": "http://cdn.meme.am/instances/54738442.jpg"
     },
     "talkAboutMe": { // the bot will response if one on the words "merci" or "bot", and the name of the bot is said
 		"merci": "de rien :)",
-		"bot": "Je ne suis pas un bot !"
+		" bot": "Je ne suis pas un bot !"
     },
 	"meme": [
 		{ // each 10 messages, doctor will receive it's last message as a meme using Ancient-aliens image

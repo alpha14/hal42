@@ -10,14 +10,16 @@
     },
     "server": "irc.freenode.net",
     "master": ["Alpha14", "Emeraude"],
+    "welcomeMessage": "Bienvenue %s !",
+    "goodbyeMessage": false,
     "react": {
-	"bocal": "https://i.imgur.com/Qg1SrLe.png",
-	"php": "https://i.imgur.com/vlpkkUM.jpg",
-	"ubuntu": "http://cdn.meme.am/instances/54738442.jpg"
+	" bocal": "https://i.imgur.com/Qg1SrLe.png",
+	" php": "https://i.imgur.com/vlpkkUM.jpg",
+	" ubuntu": "http://cdn.meme.am/instances/54738442.jpg"
     },
     "talkAboutMe": {
 	"merci": "de rien :)",
-	"bot": "Je ne suis pas un bot !"
+	" bot": "Je ne suis pas un bot !"
     },
     "meme": false,
     "history": true,

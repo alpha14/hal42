@@ -29,6 +29,11 @@ bot.addListener("join", function(channel, who) {
     }
 });
 
+bot.addListener("quit", function(who, reason, channels) {
+    if (config.goodbyeMessage != false)
+	bot.say(channels[0], config.goodbyeMessage.replace("%s", who));
+});
+
 bot.addListener('message', function (from, to, message) {
     if (config.history)
 	console.log(from + ' => ' + to + ': ' + message);
