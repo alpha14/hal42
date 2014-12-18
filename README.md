@@ -30,10 +30,11 @@ This is an example of a configuration file:
     "master": ["Alpha14", "Emeraude"], // the bot will forward their private messages
 	"welcomeMessage": "Bienvenue %s !" // welcome message, "%s" will be replaced by the name of the user
 	"goodbyeMessage": "À la prochaine %s !" // same as welcomeMessage, but when a user logout
-    "react": { // the bot will response if one on the words "bocal", "php" or "ubuntu" is said
+    "react": { // the bot will response if one on the words "bocal", "php", "ubuntu" or " windows" is said
 		" bocal": "https://i.imgur.com/Qg1SrLe.png",
 		" php": "https://i.imgur.com/vlpkkUM.jpg"
-		" ubuntu": "http://cdn.meme.am/instances/54738442.jpg"
+		" ubuntu": "http://cdn.meme.am/instances/54738442.jpg",
+		" windows": "http://cdn.meme.am/instances/57260052.jpg"
     },
     "talkAboutMe": { // the bot will response if one on the words "merci" or "bot", and the name of the bot is said
 		"merci": "de rien :)",
