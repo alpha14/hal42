@@ -12,6 +12,7 @@
     "master": ["Alpha14", "Emeraude"],
     "welcomeMessage": "Bienvenue %s !",
     "goodbyeMessage": false,
+    "responseTime": 0,
     "react": {
 	" bocal": "https://i.imgur.com/Qg1SrLe.png",
 	" php": "https://i.imgur.com/vlpkkUM.jpg",

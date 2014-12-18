@@ -30,6 +30,7 @@ This is an example of a configuration file:
     "master": ["Alpha14", "Emeraude"], // the bot will forward their private messages
 	"welcomeMessage": "Bienvenue %s !" // welcome message, "%s" will be replaced by the name of the user
 	"goodbyeMessage": "À la prochaine %s !" // same as welcomeMessage, but when a user logout
+	"responseTime": [2, 5], // will response between 2 and 5 seconds later (an int could also be used)
     "react": { // the bot will response if one on the words "bocal", "php", "ubuntu" or " windows" is said
 		" bocal": "https://i.imgur.com/Qg1SrLe.png",
 		" php": "https://i.imgur.com/vlpkkUM.jpg"

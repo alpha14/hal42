@@ -21,6 +21,13 @@ bot.sayAll = function(msg) {
 	bot.say(config.channels[i], msg);
 }
 
+bot.response = function(channel, message) {
+    var timeout = config.responseTime instanceof Array ? Math.random() * (config.responseTime[1] - config.responseTime[0]) + config.responseTime[0] : config.responseTime | 0;
+    setTimeout(function() {
+	bot.say(channel, message)
+    }, timeout * second);
+}
+
 bot.addListener("join", function(channel, who) {
     if (config.welcomeMessage != false && who !== config.name)
 	bot.say(channel, config.welcomeMessage.replace("%s", who));
@@ -40,16 +47,16 @@ bot.addListener('message', function (from, to, message) {
     if (message.indexOf(config.name) >= 0)
 	for (i in config.talkAboutMe)
 	    if (message.indexOf(i) >= 0)
-		bot.say(to, config.talkAboutMe[i]);
+		bot.response(to, config.talkAboutMe[i]);
     for (i in config.react)
 	if (message.indexOf(i) >= 0)
-	    bot.say(to, config.react[i]);
+	    bot.response(to, config.react[i]);
     if (meme) {
 	for (i in config.meme) {
 	    if (config.meme[i].user === from) {
 		if (config.meme[i].current == config.meme[i].interval) {
 		    config.meme[i].current = 1;
-		    bot.say(to, shell.exec('meme --text ' + config.meme[i].meme + ' "' + message + '"' + ' " "').output);
+		    bot.response(to, shell.exec('meme --text ' + config.meme[i].meme + ' "' + message + '"' + ' " "').output);
 		}
 		else
 		    ++config.meme[i].current;
