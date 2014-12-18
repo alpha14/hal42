@@ -28,6 +28,7 @@ This is an example of a configuration file:
     },
     "server": "irc.freenode.net",
     "master": ["Alpha14", "Emeraude"], // the bot will forward their private messages
+	"welcomeMessage": "Bienvenue %s !" // welcome message, "%s" will be replaced by the name of the user
     "react": { // the bot will response if one on the words "bocal", "php" or "ubuntu" is said
 		"bocal": "https://i.imgur.com/Qg1SrLe.png",
 		"php": "https://i.imgur.com/vlpkkUM.jpg"

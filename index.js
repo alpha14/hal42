@@ -6,12 +6,9 @@ var shell = require("shelljs");
 var config = require("./config.json");
 var second = 1000;
 var minute = second * 60;
-// configuration
-var server = config.server;
-var name = config.name;
 config.customParams.channels = config.channels;
 
-var bot = new irc.Client(server, name, config.customParams);
+var bot = new irc.Client(config.server, config.name, config.customParams);
 
 var meme = config.meme != false && shell.exec('which meme').code == 0;
 
@@ -25,8 +22,8 @@ bot.sayAll = function(msg) {
 }
 
 bot.addListener("join", function(channel, who) {
-    if (who.substring(0,name.length) != name)
-	bot.say(channel, "Bienvenue " + who +" !");
+    if (config.welcomeMessage != false && who !== config.name)
+	bot.say(channel, config.welcomeMessage.replace("%s", who));
     if (who === config.name && config["42"] == true) {
 	initSay42(channel);
     }
@@ -35,7 +32,7 @@ bot.addListener("join", function(channel, who) {
 bot.addListener('message', function (from, to, message) {
     if (config.history)
 	console.log(from + ' => ' + to + ': ' + message);
-    if (message.indexOf(name) >= 0)
+    if (message.indexOf(config.name) >= 0)
 	for (i in config.talkAboutMe)
 	    if (message.indexOf(i) >= 0)
 		bot.say(to, config.talkAboutMe[i]);
@@ -60,7 +57,7 @@ bot.addListener('pm', function (from, message) {
     console.log(from + ' => ME: ' + message);
     for (i in config.master)
 	if (config.master[i] === from)
-	bot.say(config.primaryChan, message);
+	    bot.say(config.primaryChan, message);
 });
 
 bot.addListener('error', function(message) {
