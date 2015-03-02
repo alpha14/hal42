@@ -5,7 +5,7 @@ The IRC bot for the **Equilibre** organization.
 ## Installation
 
 ```bash
-npm install
+npm install --python=python2
 mv config.json.default config.json
 ```
 

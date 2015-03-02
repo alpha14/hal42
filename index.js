@@ -1,6 +1,5 @@
 #!/usr/bin/env node
 
-var moment = require("moment");
 var irc = require("irc");
 var shell = require("shelljs");
 var config = require("./config.json");
@@ -22,7 +21,7 @@ bot.sayAll = function(msg) {
 }
 
 bot.response = function(channel, message) {
-    var timeout = config.responseTime instanceof Array ? Math.random() * (config.responseTime[1] - config.responseTime[0]) + config.responseTime[0] : config.responseTime | 0;
+    var timeout = config.responseTime instanceof Array ? Math.random() * (config.responseTime[1] - config.responseTime[0]) + config.responseTime[0] : config.responseTime || 0;
     setTimeout(function() {
 	bot.say(channel, message)
     }, timeout * second);
@@ -33,8 +32,8 @@ bot.addListener("join", function(channel, who) {
 	bot.say(channel, config.welcomeMessage.replace("%s", who));
     if (who === config.name && config["42"] == true) {
 	initSay42(channel);
+	config["42"] == false;
     }
-    config["42"] == false;
 });
 
 bot.addListener("quit", function(who, reason, channels) {
@@ -67,44 +66,26 @@ bot.addListener('message', function (from, to, message) {
 });
 
 bot.addListener('pm', function (from, message) {
-    console.log(from + ' => ME: ' + message);
     for (i in config.master)
 	if (config.master[i] === from)
 	    bot.say(config.primaryChan, message);
 });
 
 bot.addListener('error', function(message) {
-    console.log('error: ', message);
+    console.error('error: ', message);
 });
 
 function initSay42(channel) {
-    var getSeconds = moment().seconds()
-    var getMinutes = moment().minutes();
+    var now = new Date();
     var minutesLeft;
     var secondsLeft;
-    var interval;
 
-    if (getMinutes < 42)
-	minutesLeft = (42 - getMinutes) - 1;
-    else
-	minutesLeft = (60 - getMinutes) + 42 - 1;
-
-    if (getSeconds === 0)
-	secondsLeft = 0;
-    else
-	secondsLeft = 60 - getSeconds;
-    interval = (minutesLeft * minute) + (secondsLeft * second);
+    minutesLeft = (42 - now.getMinutes() + 59) % 60;
+    secondsLeft = (60 - now.getSeconds()) % 61;
     setTimeout(function() {
-	say42(channel);
-    }, interval);
-    console.log(moment().format());
-    console.log('First call in ' + minutesLeft + ' minutes and ' + secondsLeft + ' seconds');
-}
-
-function say42(channel) {
-    setTimeout(function() {
-	say42(channel);
-    }, minute * 60);
-    console.log('42');
-    bot.say(channel, "42 !");
+	initSay42(channel);
+	console.log('42');
+	bot.say(channel, "42 !");
+    }, minutesLeft * minute + secondsLeft * second);
+    console.log('Next call in ' + minutesLeft + ' minutes and ' + secondsLeft + ' seconds');
 }
