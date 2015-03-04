@@ -11,6 +11,8 @@ var bot = new irc.Client(config.server, config.name, config.customParams);
 
 var meme = config.meme != false && shell.exec('which meme').code == 0;
 
+console.log("Connecting " + config.name + " to " + config.server + "...");
+
 if (meme)
     for (i in config.meme)
 	config.meme[i].current = 1;
