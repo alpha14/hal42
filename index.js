@@ -34,7 +34,7 @@ bot.addListener("join", function(channel, who) {
 	bot.say(channel, config.welcomeMessage.replace("%s", who));
     if (who === config.name && config["42"] == true) {
 	initSay42(channel);
-	config["42"] == false;
+	config["42"] = false;
     }
 });
 
