@@ -58,7 +58,7 @@ bot.addListener('message', function (from, to, message) {
 	    if (config.meme[i].user === from) {
 		if (config.meme[i].current == config.meme[i].interval) {
 		    config.meme[i].current = 1;
-		    bot.response(to, shell.exec('meme --text ' + config.meme[i].meme + ' "' + message + '"' + ' " "').output);
+		    bot.response(to, shell.exec("meme --text " + config.meme[i].meme + " '" + message.replace(/'/g, "\\'") + "'" + " ' '").output);
 		}
 		else
 		    ++config.meme[i].current;
