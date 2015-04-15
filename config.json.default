@@ -5,14 +5,15 @@
     "customParams": {
 	"userName": "HAL42",
 	"realName": "HAL42",
-	"password": "",
-	"sasl": true
+	"secure": true,
+	"port": 6697
     },
     "server": "irc.freenode.net",
     "master": ["Alpha14", "Emeraude"],
     "welcomeMessage": "Bienvenue %s !",
     "goodbyeMessage": false,
     "responseTime": 0,
+    "maxResponses": 1,
     "react": {
 	" bocal": "https://i.imgur.com/Qg1SrLe.png",
 	" php": "https://i.imgur.com/vlpkkUM.jpg",

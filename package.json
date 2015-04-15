@@ -4,8 +4,8 @@
   "description": "The IRC bot for the **Equilibre** organization.",
   "main": "index.js",
   "dependencies": {
-    "irc": "^0.3.7",
-    "shelljs": "^0.3.0"
+    "irc": "^0.3.11",
+    "shelljs": "^0.4.0"
   },
   "author": "Equilibre",
   "license": "GPL-3.0",

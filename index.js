@@ -44,15 +44,24 @@ bot.addListener("quit", function(who, reason, channels) {
 });
 
 bot.addListener('message', function (from, to, message) {
+    var responses = config.maxResponses || -1;
     if (config.history)
 	console.log(from + ' => ' + to + ': ' + message);
     if (message.indexOf(config.name) >= 0)
-	for (i in config.talkAboutMe)
+	for (i in config.talkAboutMe) {
+	    if (responses == 0)
+		break ;
+	    --responses;
 	    if (message.indexOf(i) >= 0)
 		bot.response(to, config.talkAboutMe[i]);
-    for (i in config.react)
+	}
+    for (i in config.react) {
+	if (responses == 0)
+	    break ;
+	--responses;
 	if (message.indexOf(i) >= 0)
 	    bot.response(to, config.react[i]);
+    }
     if (meme) {
 	for (i in config.meme) {
 	    if (config.meme[i].user === from) {
