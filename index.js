@@ -3,6 +3,7 @@
 var irc = require("irc");
 var shell = require("shelljs");
 var config = require("./config.json");
+var exec = require('child_process').exec;
 var second = 1000;
 var minute = second * 60;
 config.customParams.channels = config.channels;
@@ -61,6 +62,28 @@ bot.addListener('message', function (from, to, message) {
 	--responses;
 	if (message.indexOf(i) >= 0)
 	    bot.response(to, config.react[i]);
+    }
+    if (/^!gh (.*?)/i.test(message)) {
+	bot.say(to, 'https://github.com/search?type=Everything&start_value=1&q=' + encodeURI(message.substring(4)));
+    }
+    if (/^!ddg (.*?)/i.test(message)) {
+	bot.say(to, 'https://duckduckgo.com/?q=' + encodeURI(message.substring(5)));
+    }
+    if (/^!w (.*?)/i.test(message)) {
+	bot.say(to, 'https://en.wikipedia.org/wiki/Special:Search?&go=Go&search=' + encodeURI(message.substring(3)));
+    }
+    if (/^!tek (.*?)/i.test(message)) {
+	bot.say(to, 'https://intra.epitech.eu/user/' + encodeURI(message.substring(5)));
+    }
+    if (/^!(imdb)|(film) (.*?)/i.test(message)) {
+	bot.say(to, 'http://www.imdb.com/find?s=all&q=' + encodeURI(message.substring(6)));
+    }
+
+    if (/^!ping (.*?)/i.test(message)) {
+	exec('ping -c 1 ' + encodeURI(message.substring(6)) + '| grep 64', function(err, stdout, stderr)
+	     {
+		 bot.say(to, stdout);
+	     });
     }
     if (meme) {
 	for (i in config.meme) {
