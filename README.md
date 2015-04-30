@@ -41,7 +41,10 @@ This is an example of a configuration file:
     "talkAboutMe": { // the bot will response if one on the words "merci" or "bot", and the name of the bot is said
 		"merci": "de rien :)",
 		" bot": "Je ne suis pas un bot !"
-    },
+	},
+	"searchEngine": { // The bot will response to !ddg with a search on ddg
+		"ddg": "https://duckduckgo.com/?q=%s" // '%s' will be replaced by the message
+	},
 	"meme": [
 		{ // each 10 messages, doctor will receive it's last message as a meme using Ancient-aliens image
 			"user": "Doctor",
