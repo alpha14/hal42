@@ -48,6 +48,12 @@ bot.addListener('message', function (from, to, message) {
     var responses = config.maxResponses || -1;
     if (config.history)
 	console.log(from + ' => ' + to + ': ' + message);
+    if (config.searchEngine && message[0] == '!')
+	for (i in config.searchEngine)
+	    if (message.match("^!" + i + " ")) {
+		bot.say(to, encodeURI(config.searchEngine[i].replace('%s', message.split(new RegExp("^\\!" + i + " "))[1])));
+		return;
+	    }
     if (message.indexOf(config.name) >= 0)
 	for (i in config.talkAboutMe) {
 	    if (responses == 0)
@@ -63,11 +69,6 @@ bot.addListener('message', function (from, to, message) {
 	if (message.indexOf(i) >= 0)
 	    bot.response(to, config.react[i]);
     }
-    if (config.searchEgine && message[0] == '!')
-	for (i in config.searchEngine)
-	    if (message.match("^!" + i + " "))
-		bot.say(to, encodeURI(config.searchEngine[i].replace('%s', message.split(new RegExp("^\\!" + i + " "))[1])));
-
     if (/^!ping (.*?)/i.test(message)) {
 	exec('ping -c 1 ' + encodeURI(message.substring(6)) + '| grep 64', function(err, stdout, stderr)
 	     {
