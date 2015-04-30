@@ -48,6 +48,12 @@ bot.addListener('message', function (from, to, message) {
     var responses = config.maxResponses || -1;
     if (config.history)
 	console.log(from + ' => ' + to + ': ' + message);
+    if (config.searchEngine && message[0] == '!')
+	for (i in config.searchEngine)
+	    if (message.match("^!" + i + " ")) {
+		bot.say(to, encodeURI(config.searchEngine[i].replace('%s', message.split(new RegExp("^\\!" + i + " "))[1])));
+		return;
+	    }
     if (message.indexOf(config.name) >= 0)
 	for (i in config.talkAboutMe) {
 	    if (responses == 0)
@@ -63,22 +69,6 @@ bot.addListener('message', function (from, to, message) {
 	if (message.indexOf(i) >= 0)
 	    bot.response(to, config.react[i]);
     }
-    if (/^!gh (.*?)/i.test(message)) {
-	bot.say(to, 'https://github.com/search?type=Everything&start_value=1&q=' + encodeURI(message.substring(4)));
-    }
-    if (/^!ddg (.*?)/i.test(message)) {
-	bot.say(to, 'https://duckduckgo.com/?q=' + encodeURI(message.substring(5)));
-    }
-    if (/^!w (.*?)/i.test(message)) {
-	bot.say(to, 'https://en.wikipedia.org/wiki/Special:Search?&go=Go&search=' + encodeURI(message.substring(3)));
-    }
-    if (/^!tek (.*?)/i.test(message)) {
-	bot.say(to, 'https://intra.epitech.eu/user/' + encodeURI(message.substring(5)));
-    }
-    if (/^!(imdb)|(film) (.*?)/i.test(message)) {
-	bot.say(to, 'http://www.imdb.com/find?s=all&q=' + encodeURI(message.substring(6)));
-    }
-
     if (/^!ping (.*?)/i.test(message)) {
 	exec('ping -c 1 -W 2 ' + encodeURI(message.substring(6))
 	     + '| grep 64 || echo "ping: host seems down or blocking ping"', function(err, stdout, stderr)

@@ -24,6 +24,14 @@
 	"merci": "de rien :)",
 	" bot": "Je ne suis pas un bot !"
     },
+    "searchEngine": {
+	"ddg": "https://duckduckgo.com/?q=%s",
+	"imdb": "http://www.imdb.com/find?s=all&q=",
+	"gh": "https://github.com/search?type=Everything&start_value=1&q=%s",
+	"tek": "https://intra.epitech.eu/user/%s",
+	"w": "https://en.wikipedia.org/wiki/Special:Search?&go=Go&search=%s",
+	"yt": "https://www.youtube.com/results?search_query=%s"
+    },
     "meme": false,
     "history": true,
     "42": true
