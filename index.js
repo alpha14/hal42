@@ -63,7 +63,7 @@ bot.addListener('message', function (from, to, message) {
 	if (message.indexOf(i) >= 0)
 	    bot.response(to, config.react[i]);
     }
-    if (message[0] == '!')
+    if (config.searchEgine && message[0] == '!')
 	for (i in config.searchEngine)
 	    if (message.match("^!" + i + " "))
 		bot.say(to, encodeURI(config.searchEngine[i].replace('%s', message.split(new RegExp("^\\!" + i + " "))[1])));
