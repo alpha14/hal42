@@ -80,9 +80,10 @@ bot.addListener('message', function (from, to, message) {
     }
 
     if (/^!ping (.*?)/i.test(message)) {
-	exec('ping -c 1 ' + encodeURI(message.substring(6)) + '| grep 64', function(err, stdout, stderr)
+	exec('ping -c 1 -W 2 ' + encodeURI(message.substring(6))
+	     + '| grep 64 || echo "ping: host seems down or blocking ping"', function(err, stdout, stderr)
 	     {
-		 bot.say(to, stdout);
+		 bot.say(to, stderr ? stderr : stdout);
 	     });
     }
     if (meme) {
