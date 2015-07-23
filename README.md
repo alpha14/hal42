@@ -1,3 +1,7 @@
+# Deprecated
+
+use [botpop](https://github.com/pouleta/botpop) instead !
+
 # HAL42
 
 The IRC bot for the **Equilibre** organization.
