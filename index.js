@@ -52,6 +52,31 @@ bot.addListener('message', function (from, to, message) {
 	bot.say(to, encodeURI(config.searchEngine[i].replace('%s', message.split(new RegExp("^\\!" + i + " "))[1])));
 	return;
       }
+
+  if (message.match(/^!config /)) {
+    var variable = message.split('!config ')[1].split(' ')[0];
+    var value = message.substr(9 + variable.length);
+    console.log(variable);
+    console.log(value);
+    function parseConfig(split, data) {
+      if (split.length == 1) { // It's a simple way to parse to int, bool, array...
+	try {
+	  data[split[0]] = JSON.parse(value);
+	} catch(e) {
+	  data[split[0]] = value;
+	}
+      }
+      else {
+	if (!data[split[0]])
+	  data[split[0]] = {};
+	var name = split.shift();
+	parseConfig(split, data[name]);
+      }
+    }
+    parseConfig(variable.split('.'), config);
+    require('pretty-console.log')(config);
+  }
+
   if (message.indexOf(config.name) >= 0)
     for (i in config.talkAboutMe) {
       if (responses == 0)
@@ -63,9 +88,10 @@ bot.addListener('message', function (from, to, message) {
   for (i in config.react) {
     if (responses == 0)
       break ;
-    --responses;
-    if (message.indexOf(i) >= 0)
+    if (message.indexOf(i) >= 0) {
+      --responses;
       bot.response(to, config.react[i]);
+    }
   }
   if (meme) {
     for (i in config.meme) {
