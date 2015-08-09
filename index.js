@@ -53,6 +53,24 @@ bot.addListener('message', function (from, to, message) {
 	return;
       }
 
+  if (message.indexOf(config.name) >= 0)
+    for (i in config.talkAboutMe) {
+      if (responses == 0)
+	break ;
+      if (message.indexOf(i) >= 0) {
+	--responses;
+	bot.response(to, config.talkAboutMe[i]);
+      }
+    }
+  for (i in config.react) {
+    if (responses == 0)
+      break ;
+    if (message.indexOf(i) >= 0) {
+      --responses;
+      bot.response(to, config.react[i]);
+    }
+  }
+
   if (message.match(/^!config /) && config.master[from]) {
     var variable = message.split('!config ')[1].split(' ')[0];
     var value = message.substr(9 + variable.length);
@@ -76,23 +94,6 @@ bot.addListener('message', function (from, to, message) {
     parseConfig(variable.split('.'), config);
   }
 
-  if (message.indexOf(config.name) >= 0)
-    for (i in config.talkAboutMe) {
-      if (responses == 0)
-	break ;
-      if (message.indexOf(i) >= 0) {
-	--responses;
-	bot.response(to, config.talkAboutMe[i]);
-      }
-    }
-  for (i in config.react) {
-    if (responses == 0)
-      break ;
-    if (message.indexOf(i) >= 0) {
-      --responses;
-      bot.response(to, config.react[i]);
-    }
-  }
   if (meme) {
     for (i in config.meme) {
       if (config.meme[i].user === from) {
