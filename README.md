@@ -57,7 +57,11 @@ This is an example of a configuration file:
 }
 ```
 
-If you want to use the memes, you need to install the official [Equilibre Meme Gem](https://github.com/Equilibre/meme).
+If you want to use the memes, you need to install the official [Equilibre Meme Gem](https://github.com/Equilibre/meme).  
+You can change config with this type of command:
+```
+!config var.name value
+```
 
 ### Contributors
 
