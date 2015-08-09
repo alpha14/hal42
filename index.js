@@ -8,11 +8,9 @@ config.customParams.channels = config.channels;
 
 var bot = new irc.Client(config.server, config.name, config.customParams);
 
-var meme = config.meme != false && shell.exec('which meme').code == 0;
-
 console.log("Connecting " + config.name + " to " + config.server + "...");
 
-if (meme)
+if (config.meme)
   for (i in config.meme)
     config.meme[i].current = 1;
 
@@ -71,6 +69,19 @@ bot.addListener('message', function (from, to, message) {
     }
   }
 
+  if (config.meme && shell.exec('which meme').code == 0) {
+    for (i in config.meme) {
+      if (config.meme[i].user === from) {
+	if (config.meme[i].current == config.meme[i].interval) {
+	  config.meme[i].current = 1;
+	  bot.response(to, shell.exec("meme --text " + config.meme[i].meme + " '" + message.replace(/'/g, "\\'") + "'" + " ' '").output);
+	}
+	else
+	  ++config.meme[i].current;
+      }
+    }
+  }
+
   if (message.match(/^!config /) && config.master[from]) {
     var variable = message.split('!config ')[1].split(' ')[0];
     var value = message.substr(9 + variable.length);
@@ -92,19 +103,6 @@ bot.addListener('message', function (from, to, message) {
       }
     }
     parseConfig(variable.split('.'), config);
-  }
-
-  if (meme) {
-    for (i in config.meme) {
-      if (config.meme[i].user === from) {
-	if (config.meme[i].current == config.meme[i].interval) {
-	  config.meme[i].current = 1;
-	  bot.response(to, shell.exec("meme --text " + config.meme[i].meme + " '" + message.replace(/'/g, "\\'") + "'" + " ' '").output);
-	}
-	else
-	  ++config.meme[i].current;
-      }
-    }
   }
 });
 
