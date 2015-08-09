@@ -9,7 +9,10 @@
 	"port": 6697
     },
     "server": "irc.freenode.net",
-    "master": ["Alpha14", "Emeraude"],
+    "master": {
+      "Alpha14": true,
+      "Emeraude": true
+    },
     "welcomeMessage": "Bienvenue %s !",
     "goodbyeMessage": false,
     "responseTime": 0,

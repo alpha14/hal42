@@ -108,9 +108,8 @@ bot.addListener('message', function (from, to, message) {
 });
 
 bot.addListener('pm', function (from, message) {
-  for (i in config.master)
-    if (config.master[i] === from)
-      bot.say(config.primaryChan, message);
+  if (config.master[from])
+    bot.say(config.primaryChan, message);
 });
 
 bot.addListener('error', function(message) {
