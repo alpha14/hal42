@@ -53,7 +53,7 @@ bot.addListener('message', function (from, to, message) {
 	return;
       }
 
-  if (message.match(/^!config /)) {
+  if (message.match(/^!config /) && config.master[from]) {
     var variable = message.split('!config ')[1].split(' ')[0];
     var value = message.substr(9 + variable.length);
     console.log(variable);
@@ -74,16 +74,16 @@ bot.addListener('message', function (from, to, message) {
       }
     }
     parseConfig(variable.split('.'), config);
-    require('pretty-console.log')(config);
   }
 
   if (message.indexOf(config.name) >= 0)
     for (i in config.talkAboutMe) {
       if (responses == 0)
 	break ;
-      --responses;
-      if (message.indexOf(i) >= 0)
+      if (message.indexOf(i) >= 0) {
+	--responses;
 	bot.response(to, config.talkAboutMe[i]);
+      }
     }
   for (i in config.react) {
     if (responses == 0)
