@@ -4,8 +4,6 @@ var irc = require("irc");
 var shell = require("shelljs");
 var config = require("./config.json");
 var exec = require('child_process').exec;
-var second = 1000;
-var minute = second * 60;
 config.customParams.channels = config.channels;
 
 var bot = new irc.Client(config.server, config.name, config.customParams);
@@ -27,7 +25,7 @@ bot.response = function(channel, message) {
     var timeout = config.responseTime instanceof Array ? Math.random() * (config.responseTime[1] - config.responseTime[0]) + config.responseTime[0] : config.responseTime || 0;
     setTimeout(function() {
 	bot.say(channel, message)
-    }, timeout * second);
+    }, timeout * 1000);
 }
 
 bot.addListener("join", function(channel, who) {
@@ -104,6 +102,6 @@ function initSay42(channel) {
 	initSay42(channel);
 	console.log('42');
 	bot.say(channel, "42 !");
-    }, minutesLeft * minute + secondsLeft * second);
+    }, minutesLeft * 60000 + secondsLeft * 1000);
     console.log('Next call in ' + minutesLeft + ' minutes and ' + secondsLeft + ' seconds');
 }
